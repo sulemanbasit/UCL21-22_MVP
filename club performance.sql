@@ -117,7 +117,8 @@ FROM "UCL".distributon
 GROUP BY GROUPING SETS ((club), ()); */
 
 -- Club's goal stats
-select 
+
+/* select 
 	case 
 		when grouping(club) = 1 then 'Total'
 		else club
@@ -142,4 +143,93 @@ select
         ELSE MAX(match_played) -- For individual rows, show max matches played
     END AS total_matches
 	from "UCL".goals
-	group by grouping sets ((club), ());
+	group by grouping sets ((club), ()); */
+
+
+-- Script for club's goalkeeping
+
+/*select 
+	case 
+		when grouping(club) = 1 then 'Total'
+		else club
+	end as club,
+	sum(saved) + sum(conceded) as total_attempted,
+	sum(saved) as total_saved,
+	sum(conceded) as total_conceded,
+	sum(saved_penalties) as total_saved_penalties,
+	sum(cleansheets) as total_cleansheets,
+	sum("punches made") as total_saves_by_punches,
+	case 
+		WHEN GROUPING(club) = 1 THEN (
+            SELECT SUM(max_matches)
+            FROM (
+                SELECT club, MAX(match_played) AS max_matches
+                FROM "UCL".goalkeeping
+                GROUP BY club
+            ) max_matches_per_club
+        )
+        ELSE MAX(match_played) -- For individual rows, show max matches played
+    END AS total_matches
+from "UCL".goalkeeping
+group by grouping sets ((club), ());*/
+	
+	
+-- Script to get club attempts
+
+/*select
+	case 
+		when grouping(club) = 1 then 'Total'
+		else club
+	end as club,
+	sum(total_attempts) as total_attempts,
+	sum(on_target) as total_on_target,
+	sum(off_target) as total_off_target,
+	sum(blocked) as total_blocked,
+	case 
+		WHEN GROUPING(club) = 1 THEN (
+            SELECT SUM(max_matches)
+            FROM (
+                SELECT club, MAX(match_played) AS max_matches
+                FROM "UCL".attempts
+                GROUP BY club
+            ) max_matches_per_club
+        )
+        ELSE MAX(match_played) -- For individual rows, show max matches played
+    END AS total_matches
+from "UCL".attempts
+group by grouping sets((club), ());*/
+
+
+-- Script to get club's key stats
+
+/*select 
+	case 
+		when grouping(club) = 1 then 'Total'
+		else club
+	end as club,
+	case 
+    	when grouping(club) = 1 then (
+	    	select sum(max_minutes)
+    		from (
+    			select club, Max(minutes_played) as max_minutes
+    			from "UCL".disciplinary
+	    		group by club
+    		) max_minutes_per_club
+    	) else max(minutes_played)
+    end as total_minutes_played,
+	case 
+		WHEN GROUPING(club) = 1 THEN (
+            SELECT SUM(max_matches)
+            FROM (
+                SELECT club, MAX(match_played) AS max_matches
+                FROM "UCL".attempts
+                GROUP BY club
+            ) max_matches_per_club
+        )
+        ELSE MAX(match_played) -- For individual rows, show max matches played
+    END AS total_matches,
+	sum(goals) as total_goals,
+	sum(assists) as total_assists,
+	round(avg(distance_covered)::numeric, 2) as average_distance_covered
+from "UCL".key_stats
+group by grouping sets ((club), ());*/
