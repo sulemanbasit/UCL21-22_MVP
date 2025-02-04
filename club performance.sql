@@ -53,7 +53,7 @@ GROUP BY GROUPING SETS ((club), ());*/
 
 /* Script to get club's disciplinary penalties */
 
-/* SELECT 
+/*SELECT 
     CASE 
         WHEN GROUPING(club) = 1 THEN 'Total' -- Label for total row
         ELSE club
@@ -88,7 +88,7 @@ GROUP BY GROUPING SETS ((club), ()); */
 
 /* Script to get club's distribution stats */
 
-/* SELECT 
+/*SELECT 
     CASE 
         WHEN GROUPING(club) = 1 THEN 'Total' -- Label for total row
         ELSE club
