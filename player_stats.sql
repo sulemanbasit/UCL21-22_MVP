@@ -1,0 +1,63 @@
+--WITH selected_data AS (
+--    SELECT ks.*, g.cleansheets
+--    FROM key_stats ks
+--    LEFT JOIN goalkeeping g
+--    ON ks.player_name = g.player_name
+--)
+--SELECT COUNT(*) FROM selected_data;
+
+
+--create view final_data as
+--with final_data as (
+--select ks.*, 
+--	att.corner_taken ,
+--	att.offsides  , 
+--	att.dribbles , 
+--	d.tackles , 
+--	d.t_won , 
+--	d.t_lost , 
+--	d.balls_recoverd , 
+--	d.clearance_attempted,
+--	a.total_attempts ,
+--	a.on_target ,
+--	a.off_target ,
+--	a."blocked" ,
+--	d2.red ,
+--	d2.yellow ,
+--	d2.fouls_committed ,
+--	d2.fouls_suffered ,
+--	d3.cross_accuracy ,
+--	d3.cross_attempted ,
+--	d3.cross_complted ,
+--	d3.freekicks_taken ,
+--	d3.pass_accuracy ,
+--	d3.pass_attempted ,
+--	d3.pass_completed ,
+--	g.right_foot ,
+--	g.left_foot ,
+--	g.headers ,
+--	g.penalties ,
+--	g."others" ,
+--	g.inside_area ,
+--	g.outside_areas ,
+--	g2.saved ,
+--	g2.saved_penalties ,
+--	g2.conceded ,
+--	g2.cleansheets ,
+--	g2."punches made" 
+--from key_stats ks
+--left join attacking att on ks.player_name = att.player_name
+--left join defending d on ks.player_name = d.player_name 
+--left join attempts a on ks.player_name = a.player_name 
+--left join disciplinary d2 on ks.player_name = d2.player_name 
+--left join distributon d3 on ks.player_name = d3.player_name 
+--left join goals g on ks.player_name = g.player_name 
+--left join goalkeeping g2 on ks.player_name = g2.player_name 
+--)
+--select * from final_data ;
+
+--SELECT player_name, club, COUNT(*) AS duplicates
+--FROM final_data
+--GROUP BY player_name, club
+--HAVING COUNT(*) > 1
+--ORDER BY player_name;
